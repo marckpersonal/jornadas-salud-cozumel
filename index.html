@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornadas de Salud Integral - Centro Médico Especialista</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0B4F8C;
+            --primary-dark: #0D5A9E;
+            --accent: #E74C3C;
+            --warning: #FFB84D;
+            --success: #25D366;
+            --bg-light: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #666;
+            --border: #ddd;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav img {
+            height: 60px;
+            object-fit: contain;
+        }
+
+        nav .nav-text {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 500;
+            text-align: right;
+        }
+
+        nav .nav-text small {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .karina-presentation {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.2);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .karina-image {
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .karina-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .karina-text h2 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .invita-text {
+            font-size: 1.3rem;
+            color: var(--warning);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .karina-presentation {
+                grid-template-columns: 150px 1fr;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .karina-text h2 {
+                font-size: 1.4rem;
+            }
+
+            .invita-text {
+                font-size: 1rem;
+            }
+        }
+
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(231, 76, 60, 0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            border: 2px solid var(--accent);
+            color: var(--warning);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--warning);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .hero-info {
+            background: rgba(255,255,255,0.12);
+            padding: 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+            margin-bottom: 2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-item svg {
+            width: 2.5rem;
+            height: 2.5rem;
+            margin-bottom: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .info-item h3 {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-item p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .doctors-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .doctors-box .label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .doctor-card {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .doctor-card strong {
+            font-size: 1rem;
+        }
+
+        .doctor-card small {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            display: block;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 4rem 2rem;
+            background-color: var(--bg-light);
+        }
+
+        .services .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px rgba(11, 79, 140, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .service-card svg {
+            width: 3.5rem;
+            height: 3.5rem;
+            color: var(--primary);
+            margin: 0 auto 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-weight: bold;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 4rem 2rem;
+            background-color: white;
+        }
+
+        .form-section .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-section h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .form-section > .container > p {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .form-success {
+            background: #D4EDDA;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid #C3E6CB;
+            display: none;
+        }
+
+        .form-success.show {
+            display: block;
+        }
+
+        form {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid var(--accent);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .checkbox-group {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item.checked {
+            border-color: var(--primary);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 0.75rem;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-item span {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 1.5rem;
+        }
+
+        .submit-btn:hover {
+            background-color: #D9534F;
+        }
+
+        .form-note {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #999;
+            text-align: center;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 3rem 2rem;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .contact .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-item {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-item svg {
+            width: 2.5rem;
+            height: 2.5rem;
+            margin: 0 auto 1rem;
+            color: var(--warning);
+        }
+
+        .contact-item h3 {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .whatsapp-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .whatsapp-btn:hover {
+            background: #20BA5A;
+        }
+
+        .whatsapp-hint {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #083d5c;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        footer .alliance {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            opacity: 0.7;
+            font-size: 0.8rem;
+        }
+
+        footer .alliance strong {
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-floating {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--success);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .whatsapp-floating:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .services h2,
+            .form-section h2 {
+                font-size: 1.8rem;
+            }
+
+            nav .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav .nav-text {
+                text-align: center;
+            }
+
+            .whatsapp-floating {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Centro Médico Especialista" style="display:none;">
+            <div class="nav-text">
+                <div>Jornadas de Salud</div>
+                <small>Sábado 25 y Domingo 26 de Abril</small>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="karina-presentation">
+                <div class="karina-image">
+                    <img src="/mnt/user-data/uploads/1000026842.png" alt="Karina García">
+                </div>
+                <div class="karina-text">
+                    <h2>Karina García</h2>
+                    <p class="invita-text">Invita a Jornadas de Salud</p>
+                </div>
+            </div>
+
+            <div class="hero-badge">✓ CONSULTA GRATIS + MEDICAMENTOS</div>
+
+            <h1>Jornadas de Salud Integral<br><span>Para Cozumeleños</span></h1>
+
+            <p>Consulta Médica • Rehabilitación Física y Ocupacional • Enfermería Integral</p>
+
+            <div class="hero-info">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <h3>FECHAS</h3>
+                        <p><strong>Sábado 25 de Abril</strong><br><strong>Domingo 26 de Abril</strong></p>
+                    </div>
+
+                    <div class="info-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <h3>HORARIO</h3>
+                        <p><strong>10:00 a 14:00 hrs</strong><br>No requiere cita</p>
+                    </div>
+
+                    <div class="info-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <h3>UBICACIÓN</h3>
+                        <p>35 Av. Sur Esq.<br>Jose M. Morelos<br>Col. Adolfo L. Mateo</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doctors-box">
+                <div class="label">Especialistas Disponibles (AMBOS DÍAS)</div>
+                <div class="doctors-grid">
+                    <div class="doctor-card">
+                        <strong>Dra. Mayra Castillo</strong>
+                        <small>Medicina Familiar</small>
+                    </div>
+                    <div class="doctor-card">
+                        <strong>Dr. Mario González</strong>
+                        <small>Medicina Familiar</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2>Servicios Disponibles</h2>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 4h12v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4Z"></path>
+                        <path d="M6 4c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2"></path>
+                    </svg>
+                    <h3>Consulta Médica - Medicina Familiar</h3>
+                    <p>Diagnóstico y validación de patologías con especialistas certificados</p>
+                </div>
+
+                <div class="service-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14.4 14.4L9.6 9.6"></path>
+                        <circle cx="12" cy="12" r="10"></circle>
+                    </svg>
+                    <h3>Rehabilitación Física y Ocupacional</h3>
+                    <p>Terapia especializada para recuperación funcional</p>
+                </div>
+
+                <div class="service-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <h3>Enfermería Integral para Cozumeleños</h3>
+                    <p>Atención integral de enfermería especializada</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <h2>Regístrate Ahora</h2>
+            <p>Completa el formulario para reservar tu lugar en las jornadas de salud</p>
+
+            <div class="form-success" id="successMessage">
+                ✓ ¡Registro exitoso! Nos veremos en las jornadas de salud.
+            </div>
+
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo *</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono *</label>
+                        <input type="tel" id="telefono" name="telefono" required placeholder="+52 xxx xxx xxxx">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edad">Edad</label>
+                    <input type="number" id="edad" name="edad" placeholder="Tu edad">
+                </div>
+
+                <div class="form-group">
+                    <label for="motivo">Motivo de Consulta (síntomas, dolencias, etc.)</label>
+                    <input type="text" id="motivo" name="motivo" placeholder="Ej: dolor de espalda, evaluación general, etc.">
+                </div>
+
+                <div class="form-group">
+                    <label>Servicios de Interés</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="servicio" value="medicina">
+                            <span>Consulta Médica - Medicina Familiar</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="servicio" value="rehabilitacion">
+                            <span>Rehabilitación Física y Ocupacional</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="servicio" value="enfermeria">
+                            <span>Enfermería Integral para Cozumeleños</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notas">Notas Adicionales</label>
+                    <textarea id="notas" name="notas" placeholder="Cuéntanos más sobre tu situación de salud..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">CONFIRMAR REGISTRO</button>
+                <p class="form-note">* Campos obligatorios. Tus datos serán protegidos confidencialmente.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2>¿Preguntas o Dudas?</h2>
+
+            <div class="contact-grid">
+                <div class="contact-item" onclick="openWhatsApp()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <h3>WhatsApp</h3>
+                    <button class="whatsapp-btn">+52 999 228 1065</button>
+                    <div class="whatsapp-hint">(Para adultos mayores y dudas)</div>
+                </div>
+
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <h3>Ubicación</h3>
+                    <div style="font-size: 0.9rem;">
+                        <strong>Centro Médico Especialista</strong><br>
+                        35 Av. Sur Esq. Jose M. Morelos<br>
+                        Col. Adolfo L. Mateo, C.P. 77600<br>
+                        Cozumel, Quintana Roo
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <h3>Información</h3>
+                    <div style="font-size: 0.9rem;">
+                        <strong>Ambos médicos disponibles</strong><br>
+                        Sábado 25 y Domingo 26<br>
+                        de Abril • 10:00-14:00 hrs
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><strong>© 2026 Centro Médico Especialista</strong></p>
+            <p style="opacity: 0.8; font-size: 0.85rem;">
+                Jornadas de Salud Integral • Consulta Médica • Rehabilitación Física y Ocupacional • Enfermería Integral
+            </p>
+            
+            <div class="alliance">
+                <div>Alianza Estratégica</div>
+                <div style="font-size: 0.85rem; margin-top: 0.5rem;"><strong>cuzamil.io | Salud Itinerante Cozumel</strong></div>
+                <div style="font-size: 0.75rem; margin-top: 0.25rem;">Modelo de Negocio de Servicios de Salud Itinerante</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <button class="whatsapp-floating" onclick="openWhatsApp()" title="Escríbenos por WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.537 0-2.852-.534-3.821-1.559-.976-1.034-1.529-2.405-1.529-3.785 0-3.074 2.502-5.575 5.577-5.575 1.49 0 2.893.55 3.952 1.595 1.058 1.045 1.64 2.433 1.64 3.893 0 3.073-2.502 5.575-5.577 5.575M20.354 3.272c-1.299-1.25-3.028-1.939-4.86-1.939-3.797 0-6.885 3.087-6.885 6.885 0 1.204.315 2.412.91 3.479L2.821 20.396c-.261.652-.16 1.41.276 1.983.27.343.663.536 1.07.536.247 0 .495-.052.729-.16l6.728-2.447c1.194.638 2.56.973 3.99.973 3.797 0 6.885-3.087 6.885-6.885 0-1.839-.708-3.567-1.994-4.867" fill="currentColor"/>
+        </svg>
+    </button>
+
+    <script>
+        // Form handling
+        const form = document.getElementById('registrationForm');
+        const successMessage = document.getElementById('successMessage');
+        const checkboxItems = document.querySelectorAll('.checkbox-item input');
+
+        // Checkbox toggle styling
+        checkboxItems.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const item = this.closest('.checkbox-item');
+                if (this.checked) {
+                    item.classList.add('checked');
+                } else {
+                    item.classList.remove('checked');
+                }
+            });
+        });
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = {
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                telefono: document.getElementById('telefono').value,
+                edad: document.getElementById('edad').value,
+                motivo: document.getElementById('motivo').value,
+                servicios: Array.from(checkboxItems)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.value),
+                notas: document.getElementById('notas').value,
+                fecha: new Date().toLocaleString('es-MX')
+            };
+
+            console.log('Datos capturados:', formData);
+
+            // Show success message
+            successMessage.classList.add('show');
+
+            // Reset form
+            form.reset();
+            checkboxItems.forEach(cb => {
+                cb.closest('.checkbox-item').classList.remove('checked');
+            });
+
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
+        });
+
+        // WhatsApp function
+        function openWhatsApp() {
+            window.open('https://wa.me/529992281065?text=Hola%20tengo%20una%20duda%20sobre%20las%20jornadas%20de%20salud', '_blank');
+        }
+    </script>
+</body>
+</html>
